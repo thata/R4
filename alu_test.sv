@@ -102,7 +102,7 @@ module alu_test;
             zero === 0
         ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
 
-        //  = 4
+        // FFFFFFFF >>> 1 = FFFFFFFF
         in1 = 32'hFFFFFFFF; in2 = 32'h1;
         funct3 = 3'b101; funct7 = 7'b0100000; #10
         assert (
