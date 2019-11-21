@@ -48,7 +48,6 @@ module alu_test;
         ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
 
         // and
-        // 0xFF00FF00 & 0x0F0F0F0F = 0x0F000F00
         in1 = 32'hFF00FF00; in2 = 32'h0F0F0F0F;
         funct3 = 3'b111; funct7 = 7'b0000000; #10
         assert (
@@ -67,15 +66,49 @@ module alu_test;
         ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
 
         // xor
-        in1 = 32'hFF00FF00; in2 = 32'h0F0F0F0F;
+        in1 = 32'b1100; in2 = 32'b1010;
         funct3 = 3'b100; funct7 = 7'b0000000; #10
         assert (
-            result === 32'hFF0FFF0F &&
-            negative === 1 &&
+            result === 32'b0110 &&
+            negative === 0 &&
             zero === 0
         ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
 
         // sll
+        in1 = 32'h000F; in2 = 32'h0004;
+        funct3 = 3'b001; funct7 = 7'b0000000; #10
+        assert (
+            result === 32'h00F0 &&
+            negative === 0 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
+
         // srl
+        in1 = 32'h00F0; in2 = 32'h0004;
+        funct3 = 3'b101; funct7 = 7'b0000000; #10
+        assert (
+            result === 32'h000F &&
+            negative === 0 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
+
+        // sra
+        // 16 >>> 2 = 4
+        in1 = 32'd16; in2 = 32'h0002;
+        funct3 = 3'b101; funct7 = 7'b0100000; #10
+        assert (
+            result === 32'd4 &&
+            negative === 0 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
+
+        //  = 4
+        in1 = 32'hFFFFFFFF; in2 = 32'h1;
+        funct3 = 3'b101; funct7 = 7'b0100000; #10
+        assert (
+            result === 32'hFFFFFFFF &&
+            negative === 1 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
     end
 endmodule
