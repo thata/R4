@@ -7,5 +7,5 @@ module cpu(
     output logic [31:0] dataAddr,
     output logic [31:0] writeData,
     output logic we
-);
+)
 endmodule
