@@ -5,10 +5,11 @@ module regfile(
     output logic [31:0] readData1, readData2
 );
 
+    // $0 へは書き込めるけど参照しても常に 0 が返る
     logic [31:0] registers [0:31];
 
-    assign readData1 = registers[addr1];
-    assign readData2 = registers[addr2];
+    assign readData1 = (addr1 === 6'b0) ? 32'b0 : registers[addr1];
+    assign readData2 = (addr2 === 6'b0) ? 32'b0 : registers[addr2];
 
     always_ff @(posedge clk) begin
         if (we3)
