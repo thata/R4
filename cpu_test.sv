@@ -9,13 +9,52 @@ module cpu_test;
     logic we;
 
     cpu dut(
-
+        clk,
+        n_reset,
+        instr,
+        readData,
+        result,
+        instrAddr,
+        dataAddr,
+        writeData,
+        we
     );
 
     initial begin
-        // lw rd, offser(rs1)
-        // instr | readData || result | instrAddr | dataAddr | writeData | we
-        //  | readData || result | instrAddr | dataAddr | writeData | we
+        n_reset = 1;
+        clk = 0;
+
+        // before reset
+        instr = 32'bX;
+        readData = 32'bX;
+        n_reset = 1;
+        #10
+        assert (
+            result === 32'bX &&
+            instrAddr === 32'bX &&
+            dataAddr === 32'bX &&
+            writeData === 32'bX &&
+            we === 1'bX
+        ) $display("PASSED"); else $display("FAILED");
+
+        clk = 1; clk = 0; #10
+
+        // try reset
+        instr = 32'bX;
+        readData = 32'bX;
+        n_reset = 0;
+        #10
+        assert (
+            result === 32'bX &&
+            instrAddr === 32'bX &&
+            dataAddr === 32'bX &&
+            writeData === 32'bX &&
+            we === 1'bX
+        ) $display("PASSED"); else $display("FAILED");
+
+        clk = 1; clk = 0; #10
+
+        // reset applied & lw $1, 0($0)
         instr = {
             12'b0, // imm
             5'b0, // rs1
@@ -23,6 +62,28 @@ module cpu_test;
             5'b1, // rd
             7'b0000011 // opCode
         };
-        $display(999);
+        readData = 32'bX;
+        n_reset = 1;
+        #10
+        assert (
+            result === 32'b0 &&
+            instrAddr === 32'b0 &&
+            dataAddr === 32'bX &&
+            writeData === 32'bX &&
+            we === 1'bX
+        ) $display("PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+
+        // // lw $1, 0($0)
+        // // instr | readData || result | instrAddr | dataAddr | writeData | we
+        // // ----- | XXXXXXXX || result | instrAddr | dataAddr | writeData | we
+        // instr = {
+        //     12'b0, // imm
+        //     5'b0, // rs1
+        //     3'b010, // funct3
+        //     5'b1, // rd
+        //     7'b0000011 // opCode
+        // };
+        // $display(999);
     end
 endmodule

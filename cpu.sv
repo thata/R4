@@ -7,5 +7,13 @@ module cpu(
     output logic [31:0] dataAddr,
     output logic [31:0] writeData,
     output logic we
-)
+);
+    logic [31:0] pc;
+
+    assign instrAddr = pc;
+
+    always_ff @(posedge clk) begin
+        if (!n_reset)
+            pc <= 32'b0;
+    end
 endmodule
