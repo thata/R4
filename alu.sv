@@ -1,16 +1,18 @@
 // alu
 //
-// code and operations
-// 0000: add
-// 0001: sub
-// 0010: sll
-// 0011: slt (set on less than(slt)命令である:この命令はRs < Rtの場合は1を設定し,そうでない場合は0を設定する:)
-// 0100: sltu 
-// 0101: xor
-// 0110: srl
-// 0111: sra
-// 1000: or
-// 1001: and
+// code | operations
+// ------------------
+// 0000 | add
+// 0001 | sub
+// 0010 | sll
+// 0011 | slt
+// 0100 | sltu 
+// 0101 | xor
+// 0110 | srl
+// 0111 | sra
+// 1000 | or
+// 1001 | and
+// ------------------
 
 module alu(
     input logic [31:0] in1, in2,
