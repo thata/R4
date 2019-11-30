@@ -21,8 +21,11 @@ module alu(
     output logic negative, zero
 );
     logic [31:0] sraResult;
+    logic [31:0] sltResult;
+    logic [31:0] sltuResult;
 
     assign sraResult = $signed(in1) >>> in2;
+    assign sltResult = ($signed(in1) < $signed(in2)) ? 32'b1 : 32'b0;
     assign sltuResult = (in1 < in2) ? 32'b1 : 32'b0;
 
     assign result = (op == 4'b0000) ? (in1 + in2)  :  // plus
@@ -33,8 +36,8 @@ module alu(
                     (op == 4'b0010) ? (in1 << in2) :  // sll (shift left logical)
                     (op == 4'b0110) ? (in1 >> in2) :  // srl (shift right logical)
                     (op == 4'b0111) ? sraResult    :  // sra (shift right arithmetic)
-                    (op == 4'b0011) ? 32'bX        :  // slt 予定地
-                    (op == 4'b0100) ? sltuResult      // sltu 予定地
+                    (op == 4'b0011) ? sltResult    :  // slt
+                    (op == 4'b0100) ? sltuResult      // sltu
                                     : 32'hxxxxxxxx;
     assign negative = result[31];
     assign zero = ~|result;

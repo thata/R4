@@ -127,17 +127,66 @@ module alu_test;
             zero === 0
         ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
 
-        // // slt
+        // slt
+        // 32'b0010 < 32'b0100 ? 1 : 0
+        in1 = 32'b0010; in2 = 32'b0100;
+        op = 4'b0011;
+        #10
+        assert (
+            result === 32'b1 &&
+            negative === 0 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
 
-        // // 
-        // in1 = 32'hFF; in2 = 32'h7F;
-        // op = 4'b0011;
-        // #10
-        // assert (
-        //     result === 32'h0 &&
-        //     negative === 0 &&
-        //     zero === 0
-        // ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
+        // 32'b0100 < 32'b0010 ? 1 : 0
+        in1 = 32'b0011; in2 = 32'b0010;
+        op = 4'b0011;
+        #10
+        assert (
+            result === 32'b0 &&
+            negative === 0 &&
+            zero === 1
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
+
+        // 32'FFFFFFFE(-2) < 32'hFFFFFFFF(-1) ? 1 : 0
+        in1 = 32'hFFFFFFFE; in2 = 32'hFFFFFFFF;
+        op = 4'b0011;
+        #10
+        assert (
+            result === 32'b1 &&
+            negative === 0 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
+
+        // 32'FFFFFFFF(-1) < 32'hFFFFFFFE(-2) ? 1 : 0
+        in1 = 32'hFFFFFFFF; in2 = 32'hFFFFFFFE;
+        op = 4'b0011;
+        #10
+        assert (
+            result === 32'b0 &&
+            negative === 0 &&
+            zero === 1
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
+
+        // 32'h00FF(255) < 32'hFFFFFFFF(-1) ? 1 : 0
+        in1 = 32'h00FF; in2 = 32'hFFFFFFFF;
+        op = 4'b0011;
+        #10
+        assert (
+            result === 32'b0 &&
+            negative === 0 &&
+            zero === 1
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
+
+        // 32'hFFFFFFFF(-1) < 32'h00FF(255) ? 1 : 0
+        in1 = 32'hFFFFFFFF; in2 = 32'h00FF;
+        op = 4'b0011;
+        #10
+        assert (
+            result === 32'b1 &&
+            negative === 0 &&
+            zero === 0
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
 
         // sltu
         // 32'b0010 < 32'b0100 ? 1 : 0
@@ -160,8 +209,18 @@ module alu_test;
             zero === 1
         ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
 
-        // 32'FFFFFFFE(4294967294) < 32'hFFFFFFFF(4294967295) ? 1 : 0
-        in1 = 32'hFFFFFFFE; in2 = 32'hFFFFFFFF;
+        // 32'FFFFFFFF(4294967295) < 32'hFFFFFFFE(4294967294) ? 1 : 0
+        in1 = 32'hFFFFFFFF; in2 = 32'hFFFFFFFE;
+        op = 4'b0100;
+        #10
+        assert (
+            result === 32'b0 &&
+            negative === 0 &&
+            zero === 1
+        ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
+
+        // 32'h00FF(255) < 32'hFFFFFFFF(4294967295) ? 1 : 0
+        in1 = 32'h00FF; in2 = 32'hFFFFFFFF;
         op = 4'b0100;
         #10
         assert (
@@ -170,8 +229,8 @@ module alu_test;
             zero === 0
         ) $display("PASSED"); else $display("FAILED %b %b %b", result, negative, zero);
 
-        // 32'FFFFFFFF(4294967295) < 32'hFFFFFFFE(4294967294) ? 1 : 0
-        in1 = 32'hFFFFFFFF; in2 = 32'hFFFFFFFE;
+        // 32'hFFFFFFFF(4294967295) < 32'h00FF(255) ? 1 : 0
+        in1 = 32'hFFFFFFFF; in2 = 32'h00FF;
         op = 4'b0100;
         #10
         assert (
