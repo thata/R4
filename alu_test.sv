@@ -3,8 +3,6 @@
 module alu_test;
     logic [31:0] in1, in2;
     logic [3:0] op;
-    logic [2:0] funct3;
-    logic [6:0] funct7;
     logic [31:0] result;
     logic negative, zero;
 
@@ -16,8 +14,6 @@ module alu_test;
         in1,
         in2,
         op,
-        funct3,
-        funct7,
         result,
         negative,
         zero

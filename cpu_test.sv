@@ -54,7 +54,9 @@ module cpu_test;
 
         clk = 1; clk = 0; #10
 
-        // reset applied & lw $1, 0($0)
+        // PCがリセットされる(instrAddr == 0)こと
+        // また、 lw $1, 0($0) が読み込まれて
+        // 読み込み先のアドレスが指定されること（dataAddr == 0） 
         instr = {
             12'b0, // imm
             5'b0, // rs1
@@ -68,10 +70,10 @@ module cpu_test;
         assert (
             result === 32'b0 &&
             instrAddr === 32'b0 &&
-            dataAddr === 32'bX &&
+            dataAddr === 32'b0 &&
             writeData === 32'bX &&
-            we === 1'bX
-        ) $display("PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+            we === 1'b0
+        ) $display("PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
 
         // // lw $1, 0($0)
