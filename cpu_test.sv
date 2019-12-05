@@ -54,17 +54,11 @@ module cpu_test;
 
         clk = 1; clk = 0; #10
 
-        // PCがリセットされる(instrAddr == 0)こと
+        // PCがリセットされる(instrAddr == 0)こと。
         // また、 lw $1, 0($0) が読み込まれて
-        // 読み込み先のアドレスが指定されること（dataAddr == 0） 
-        instr = {
-            12'b0, // imm
-            5'b0, // rs1
-            3'b010, // funct3
-            5'b1, // rd
-            7'b0000011 // opCode
-        };
-        readData = 32'bX;
+        // 読み込み先のアドレスが指定される（dataAddr == 0）こと。 
+        instr = lw(5'b1, 5'b0, 12'b0);
+        readData = 32'h00FF;
         n_reset = 1;
         #10
         assert (
@@ -75,17 +69,22 @@ module cpu_test;
             we === 1'b0
         ) $display("PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
+        clk = 1; clk = 0; #10
 
-        // // lw $1, 0($0)
-        // // instr | readData || result | instrAddr | dataAddr | writeData | we
-        // // ----- | XXXXXXXX || result | instrAddr | dataAddr | writeData | we
-        // instr = {
-        //     12'b0, // imm
-        //     5'b0, // rs1
-        //     3'b010, // funct3
-        //     5'b1, // rd
-        //     7'b0000011 // opCode
-        // };
-        // $display(999);
+        // add $1, $1, $1
+        instr = add(5'b1, 5'b1, 5'b1);
+        readData = 32'bX;
+        n_reset = 1;
+        #10
+        assert (
+            result === 32'h01FE &&
+            instrAddr === 32'h0004 &&
+            dataAddr === 32'h01FE &&
+            writeData === 32'bX &&
+            we === 1'b0
+        ) $display("PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        // clk = 1; clk = 0; #10
+
     end
 endmodule

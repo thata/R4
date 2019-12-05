@@ -15,4 +15,9 @@ module regfile(
         if (we3)
             registers[addr3] <= writeData3;
     end
+
+    // always @(*) begin
+    //     $display("$1 %b", registers[1]);
+    //     $display("$2 %b", registers[2]);
+    // end
 endmodule

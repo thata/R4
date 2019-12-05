@@ -48,37 +48,52 @@ module cpu(
     immgen ig(instr, imm);
 
     // decoder
-    logic dcWE;
+    logic dcMemWrite;
+    logic dcRegWrite;
+    logic dcAluSrc;
     decoder dc(
         instr,
-        dcWE
+        dcMemWrite,
+        dcRegWrite,
+        dcAluSrc
     );
 
+    // aluIn2Sel
+    logic [31:0] aluIn2Sel;
+    assign aluIn2Sel = (dcAluSrc === 0) ? imm : rfReadData2;
+                           
     assign instrAddr = pc;
-    assign we = dcWE;
+    assign we = dcMemWrite;
 
     assign rfAddr1 = instr[19:15]; // rs1
-    // assign rfAddr3 = instr[11:7]; // rd
+    assign rfAddr2 = instr[24:20]; // rs2
+    assign rfAddr3 = instr[11:7];  // rd
+    assign rfWe3 = dcRegWrite;
+    assign rfWriteData3 = readData;
 
     assign aluOp = 4'b0000;
     assign aluIn1 = rfReadData1;
-    assign aluIn2 = imm;
+    assign aluIn2 = aluIn2Sel;
     assign result = aluResult;
 
     assign dataAddr = result;
 
-    // assign rfWriteData3 = writeData;
-
     always_ff @(posedge clk) begin
         if (!n_reset)
             pc <= 32'b0;
+        else
+            pc <= pc + 4;
     end
-endmodule
 
-module decoder(
-    input logic [31:0] instr,
-    output logic we
-);
-    assign we = (instr === 32'bX) ? 1'bX
-                                  : 1'b0;
+    // always @(*) begin
+    //     $display("instr %b", instr);
+    //     $display("A1 %b", rfAddr1);
+    //     $display("RD1 %b", rfReadData1);
+    //     $display("A2 %b", rfAddr2);
+    //     $display("RD2 %b", rfReadData2);
+    //     $display("A3 %b", rfAddr3);
+    //     $display("WD3 %b", rfWriteData3);
+    //     $display("aluSrc %b", dcAluSrc);
+    //     $display("aluIn2 %h", aluIn2Sel);
+    // end
 endmodule
