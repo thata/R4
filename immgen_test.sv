@@ -15,5 +15,10 @@ module immgen_test;
         };
         #10
         assert (imm === 32'b0) $display("PASSED"); else $display("FAILED %b", imm);
+
+        // S形式の即値
+        instr = sw(5'b0, 5'b1, 11'b01111111111);
+        #10
+        assert (imm === 32'b01111111111) $display("PASSED"); else $display("FAILED %b", imm);
     end
 endmodule

@@ -55,28 +55,30 @@ module cpu(
         instr,
         dcMemWrite,
         dcRegWrite,
-        dcAluSrc
+        dcAluSrc,
+        dcMemToReg
     );
-
-    // aluIn2Sel
-    logic [31:0] aluIn2Sel;
-    assign aluIn2Sel = (dcAluSrc === 0) ? imm : rfReadData2;
                            
     assign instrAddr = pc;
     assign we = dcMemWrite;
 
+    logic [31:0] rfWriteData3Sel;
     assign rfAddr1 = instr[19:15]; // rs1
     assign rfAddr2 = instr[24:20]; // rs2
     assign rfAddr3 = instr[11:7];  // rd
     assign rfWe3 = dcRegWrite;
-    assign rfWriteData3 = readData;
+    assign rfWriteData3Sel = (dcMemToReg) ? readData : result; 
+    assign rfWriteData3 = rfWriteData3Sel;
 
+    logic [31:0] aluIn2Sel;
     assign aluOp = 4'b0000;
     assign aluIn1 = rfReadData1;
+    assign aluIn2Sel = (dcAluSrc === 0) ? imm : rfReadData2;
     assign aluIn2 = aluIn2Sel;
     assign result = aluResult;
 
     assign dataAddr = result;
+    assign writeData = rfReadData2;
 
     always_ff @(posedge clk) begin
         if (!n_reset)
