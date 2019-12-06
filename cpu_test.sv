@@ -8,6 +8,8 @@ module cpu_test;
     logic [31:0] writeData;
     logic we;
 
+    logic [5:0] i;
+
     cpu dut(
         clk,
         n_reset,
@@ -23,6 +25,14 @@ module cpu_test;
     initial begin
         n_reset = 1;
         clk = 0;
+
+        // reset registers
+        for (i = 0; i < 32; i = i + 1) begin
+            // add $rd, $rs1, $rs2
+            instr = add(i[4:0], 5'b0, 5'b0);
+            #10
+            clk = 1; clk = 0;
+        end
 
         // before reset
         instr = 32'bX;
