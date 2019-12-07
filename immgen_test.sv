@@ -6,19 +6,18 @@ module immgen_test;
 
     initial begin
         // I形式の即値
-        instr = {
-            12'b0, // imm
-            5'b0, // rs1
-            3'b010, // funct3
-            5'b1, // rd
-            7'b0000011 // opCode
-        };
+        instr = lw(5'b0, 5'b0, 12'b1111_1111_1111);
         #10
-        assert (imm === 32'b0) $display("PASSED"); else $display("FAILED %b", imm);
+        assert (imm === 32'b11111111_11111111_11111111_11111111) $display("PASSED"); else $display("FAILED %b", imm);
 
         // S形式の即値
-        instr = sw(5'b0, 5'b1, 11'b01111111111);
+        instr = sw(5'b0, 5'b1, 12'b1111_11111110);
         #10
-        assert (imm === 32'b01111111111) $display("PASSED"); else $display("FAILED %b", imm);
+        assert (imm === 32'b11111111_11111111_11111111_11111110) $display("PASSED"); else $display("FAILED %b", imm);
+
+        // B形式の即値
+        instr = beq(5'b0, 5'b0, 12'b1111_0000_1110);
+        #10
+        assert (imm === 32'b1111_1111_1111_1111_1111_1111_0000_1110) $display("PASSED"); else $display("FAILED %b", imm);
     end
 endmodule

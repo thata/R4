@@ -47,3 +47,21 @@ function [31:0] add(
         7'b0110011 // opCode
     };
 endfunction
+
+// beq rs1, rs2, imm
+function [31:0] beq(
+    input logic [4:0] rs1,
+    input logic [4:0] rs2,
+    input logic [12:0] imm
+);
+    beq = {
+        imm[12],
+        imm[10:5],
+        rs2,
+        rs1,
+        3'b000, // funct3
+        imm[4:1],
+        imm[11],
+        7'b1100011 // opCode
+    };
+endfunction
