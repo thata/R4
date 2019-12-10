@@ -45,7 +45,7 @@ module cpu_test;
             dataAddr === 32'bX &&
             writeData === 32'bX &&
             we === 1'b0
-        ) $display("PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("1 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
         clk = 1; clk = 0; #10
 
@@ -60,7 +60,7 @@ module cpu_test;
             dataAddr === 32'bX &&
             writeData === 32'bX &&
             we === 1'b0
-        ) $display("PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("2 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
         clk = 1; clk = 0; #10
 
@@ -75,9 +75,9 @@ module cpu_test;
             result === 32'b0 &&
             instrAddr === 32'b0 &&
             dataAddr === 32'b0 &&
-            // writeData === 32'bX &&
+            writeData === 32'b0 &&
             we === 1'b0
-        ) $display("PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("3 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
         clk = 1; clk = 0; #10
 
@@ -90,9 +90,9 @@ module cpu_test;
             result === 32'h01FE &&
             instrAddr === 32'h0004 &&
             dataAddr === 32'h01FE &&
-            // writeData === 32'bX &&
+            writeData === 32'h00FF &&
             we === 1'b0
-        ) $display("PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("4 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
         clk = 1; clk = 0; #10
 
@@ -107,6 +107,50 @@ module cpu_test;
             dataAddr === 32'h0000 &&
             writeData === 32'h01FE &&
             we === 1'b1
-        ) $display("PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("5 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10
+
+        // // $31と$30へ0xFFをセット
+        // instr = lw(5'd30, 5'b0, 12'b0);
+        // readData = 32'h00FF;
+        // #10
+        // clk = 1; clk = 0;
+
+        // instr = lw(5'd31, 5'b0, 12'b0);
+        // readData = 32'h00FF;
+        // #10
+        // clk = 1; clk = 0;
+
+        // beq $30, $31, 0b0110
+        // 12バイト先へ分岐
+        instr = beq(5'd30, 5'd31, 11'b0110);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'h0000 &&
+            instrAddr === 32'h000C &&
+            dataAddr === 32'h0000 &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("6 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10
+
+        // add $0, $0, $0 (nop)
+        instr = add(5'b0, 5'b0, 5'b0);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'h0000 &&
+            instrAddr === 32'h0018 &&
+            dataAddr === 32'h0000 &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("7 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10
+
+
     end
 endmodule

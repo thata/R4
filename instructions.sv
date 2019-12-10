@@ -52,16 +52,16 @@ endfunction
 function [31:0] beq(
     input logic [4:0] rs1,
     input logic [4:0] rs2,
-    input logic [12:0] imm
+    input logic [11:0] imm
 );
     beq = {
-        imm[12],
-        imm[10:5],
+        imm[11],
+        imm[9:4],
         rs2,
         rs1,
         3'b000, // funct3
-        imm[4:1],
-        imm[11],
+        imm[3:0],
+        imm[10],
         7'b1100011 // opCode
     };
 endfunction

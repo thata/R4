@@ -41,5 +41,13 @@ module alu(
                                     : 32'hxxxxxxxx;
     assign negative = result[31];
     assign zero = ~|result;
+
+    // always @(*) begin
+    //     $display("op %b", op);
+    //     $display("in1 %b", in1);
+    //     $display("in2 %b", in2);
+    //     $display("result %b", result);
+    //     $display("zero %b", zero);
+    // end    
 endmodule
 

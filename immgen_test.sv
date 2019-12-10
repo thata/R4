@@ -16,7 +16,7 @@ module immgen_test;
         assert (imm === 32'b11111111_11111111_11111111_11111110) $display("PASSED"); else $display("FAILED %b", imm);
 
         // B形式の即値
-        instr = beq(5'b0, 5'b0, 12'b1111_0000_1110);
+        instr = beq(5'b0, 5'b0, 11'b1111_0000_111);
         #10
         assert (imm === 32'b1111_1111_1111_1111_1111_1111_0000_1110) $display("PASSED"); else $display("FAILED %b", imm);
     end

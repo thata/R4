@@ -52,6 +52,17 @@ module alu_test;
             zero === 0
         ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
 
+        // sub
+        // 0x00000110 - 0x00000110 = 0x00000000
+        in1 = 32'h00000110; in2 = 32'h00000110;
+        op = 4'b0001;
+        #10
+        assert (
+            result === 32'h00000000 &&
+            negative === 0 &&
+            zero === 1
+        ) $display("PASSED"); else $display("FAILED %h %b %b", result, negative, zero);
+
         // and
         in1 = 32'hFF00FF00; in2 = 32'h0F0F0F0F;
         op = 4'b1001;

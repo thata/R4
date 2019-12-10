@@ -19,6 +19,7 @@ module regfile(
     // always @(*) begin
     //     $display("$1 %b", registers[1]);
     //     $display("$2 %b", registers[2]);
+    //     $display("$30 %b", registers[30]);
     //     $display("$31 %b", registers[31]);
     // end
 endmodule

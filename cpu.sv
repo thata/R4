@@ -50,13 +50,16 @@ module cpu(
     // decoder
     logic dcMemWrite;
     logic dcRegWrite;
-    logic dcAluSrc;
+    logic aluSrc;
+    logic branch;
     decoder dc(
         instr,
         dcMemWrite,
         dcRegWrite,
-        dcAluSrc,
-        dcMemToReg
+        aluSrc,
+        aluOp,
+        dcMemToReg,
+        branch
     );
                            
     assign instrAddr = pc;
@@ -71,31 +74,41 @@ module cpu(
     assign rfWriteData3 = rfWriteData3Sel;
 
     logic [31:0] aluIn2Sel;
-    assign aluOp = 4'b0000;
     assign aluIn1 = rfReadData1;
-    assign aluIn2Sel = (dcAluSrc === 0) ? imm : rfReadData2;
+    assign aluIn2Sel = (aluSrc === 0) ? imm : rfReadData2;
     assign aluIn2 = aluIn2Sel;
     assign result = aluResult;
 
     assign dataAddr = result;
     assign writeData = rfReadData2;
 
+    logic [31:0] nextPC;
+    assign nextPC = (branch & aluZero) ? pc + imm
+                                        : pc + 4;
+
     always_ff @(posedge clk) begin
         if (!n_reset)
             pc <= 32'b0;
         else
-            pc <= pc + 4;
+            pc <= nextPC;
     end
 
     // always @(*) begin
-    //     $display("instr %b", instr);
-    //     $display("A1 %b", rfAddr1);
-    //     $display("RD1 %b", rfReadData1);
-    //     $display("A2 %b", rfAddr2);
-    //     $display("RD2 %b", rfReadData2);
-    //     $display("A3 %b", rfAddr3);
-    //     $display("WD3 %b", rfWriteData3);
-    //     $display("aluSrc %b", dcAluSrc);
-    //     $display("aluIn2 %h", aluIn2Sel);
+    //     // $display("instr %b", instr);
+    //     // $display("result %b", aluResult);
+    //     // $display("zero %b", aluZero);
+    //     // $display("branch %b", branch);
+    //     $display("pc %h", pc);
+    //     $display("nextPC %h", nextPC);
+    //     // $display("A1 %b", rfAddr1);
+    //     // $display("RD1 %b", rfReadData1);
+    //     // $display("A2 %b", rfAddr2);
+    //     // $display("RD2 %b", rfReadData2);
+    //     // $display("A3 %b", rfAddr3);
+    //     // $display("WD3 %b", rfWriteData3);
+    //     // $display("aluSrc %b", aluSrc);
+    //     // $display("aluOp %b", aluOp);
+    //     // $display("aluIn1 %b", aluIn1);
+    //     // $display("aluIn2 %b", aluIn2);
     // end
 endmodule
