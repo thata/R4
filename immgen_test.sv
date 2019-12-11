@@ -1,3 +1,4 @@
+// iverilog -g 2012 -s immgen_test *.sv && ./a.out
 module immgen_test;
     logic [31:0] instr;
     logic [31:0] imm;

@@ -1,3 +1,4 @@
+// iverilog -g 2012 -s cpu_test *.sv && ./a.out
 module cpu_test;
     logic clk, n_reset;
     logic [31:0] instr;
@@ -135,7 +136,7 @@ module cpu_test;
             we === 1'b0
         ) $display("6 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
-        clk = 1; clk = 0; #10
+        clk = 1; clk = 0; #10;
 
         // add $0, $0, $0 (nop)
         instr = add(5'b0, 5'b0, 5'b0);
@@ -149,8 +150,6 @@ module cpu_test;
             we === 1'b0
         ) $display("7 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
-        clk = 1; clk = 0; #10
-
-
+        clk = 1; clk = 0; #10;
     end
 endmodule

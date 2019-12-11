@@ -1,11 +1,14 @@
+// iverilog -g 2012 -s decoder_test *.sv && ./a.out
 module decoder_test;
     logic [31:0] instr;
     logic memWrite;
     logic regWrite;
     logic aluSrc;
+    logic [3:0] aluOp;
     logic memToReg;
+    logic branch;
 
-    decoder dut(instr, memWrite, regWrite, aluSrc, memToReg);
+    decoder dut(instr, memWrite, regWrite, aluSrc, aluOp, memToReg, branch);
 
     initial begin
         // lw
