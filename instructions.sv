@@ -48,6 +48,23 @@ function [31:0] add(
     };
 endfunction
 
+// add rd, rs1, rs2
+// rd = rs1 - rs2
+function [31:0] sub(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    sub = {
+        7'b0100000, // funct7
+        rs2,
+        rs1,
+        3'b000, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
 // beq rs1, rs2, imm
 function [31:0] beq(
     input logic [4:0] rs1,
