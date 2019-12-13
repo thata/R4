@@ -165,5 +165,17 @@ module cpu_test;
         ) $display("8 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
         clk = 1; clk = 0; #10;
+
+        // addi $1, $1, 0x00F
+        instr = addi(5'b1, 5'b1, 12'h00F);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'h00FF &&
+            instrAddr === 32'h0020 &&
+            dataAddr === 32'h00FF &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("9 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
     end
 endmodule
