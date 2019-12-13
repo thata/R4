@@ -93,22 +93,22 @@ module cpu(
             pc <= nextPC;
     end
 
-    // always @(*) begin
-    //     // $display("instr %b", instr);
-    //     // $display("result %b", aluResult);
-    //     // $display("zero %b", aluZero);
-    //     // $display("branch %b", branch);
-    //     $display("pc %h", pc);
-    //     $display("nextPC %h", nextPC);
-    //     // $display("A1 %b", rfAddr1);
-    //     // $display("RD1 %b", rfReadData1);
-    //     // $display("A2 %b", rfAddr2);
-    //     // $display("RD2 %b", rfReadData2);
-    //     // $display("A3 %b", rfAddr3);
-    //     // $display("WD3 %b", rfWriteData3);
-    //     // $display("aluSrc %b", aluSrc);
-    //     // $display("aluOp %b", aluOp);
-    //     // $display("aluIn1 %b", aluIn1);
-    //     // $display("aluIn2 %b", aluIn2);
-    // end
+    always @(*) begin
+        // $display("instr %b", instr);
+        // $display("result %b", aluResult);
+        // $display("zero %b", aluZero);
+        // $display("branch %b", branch);
+        // $display("pc %h", pc);
+        // $display("nextPC %h", nextPC);
+        // $display("A1 %b", rfAddr1);
+        // $display("RD1 %b", rfReadData1);
+        // $display("A2 %b", rfAddr2);
+        // $display("RD2 %b", rfReadData2);
+        // $display("A3 %b", rfAddr3);
+        // $display("WD3 %b", rfWriteData3);
+        $display("aluSrc %b", aluSrc);
+        $display("aluOp %b", aluOp);
+        $display("aluIn1 %b", aluIn1);
+        $display("aluIn2 %b", aluIn2);
+    end
 endmodule

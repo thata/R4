@@ -36,7 +36,6 @@ module decoder(
                     (opCode === 7'b1100011) ? 1'b1   // B type
                                             : 1'b0;
 
-
     assign memToReg = (opCode == 7'b0000011) ? 1'b1 : 1'b0;
 
     assign branch = (opCode === 7'b1100011) ? 1'b1 // B type

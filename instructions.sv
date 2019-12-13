@@ -48,7 +48,23 @@ function [31:0] add(
     };
 endfunction
 
-// add rd, rs1, rs2
+// addi rd, rs1, immediate
+// rd = rs1 + immediate
+function [31:0] addi(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [11:0] imm
+);
+    addi = {
+        imm,
+        rs1,
+        3'b000, // funct3
+        rd,
+        7'b0010011 // opCode
+    };
+endfunction
+
+// sub rd, rs1, rs2
 // rd = rs1 - rs2
 function [31:0] sub(
     input logic [4:0] rd,
@@ -60,6 +76,57 @@ function [31:0] sub(
         rs2,
         rs1,
         3'b000, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
+// and rd, rs1, rs2
+// rd = rs1 & rs2
+function [31:0] _and(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    _and = {
+        7'b0000000, // funct7
+        rs2,
+        rs1,
+        3'b111, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
+// or rd, rs1, rs2
+// rd = rs1 | rs2
+function [31:0] _or(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    _or = {
+        7'b0000000, // funct7
+        rs2,
+        rs1,
+        3'b110, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
+// xor rd, rs1, rs2
+// rd = rs1 ^ rs2
+function [31:0] _xor(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    _xor = {
+        7'b0000000, // funct7
+        rs2,
+        rs1,
+        3'b100, // funct3
         rd,
         7'b0110011 // opCode
     };
