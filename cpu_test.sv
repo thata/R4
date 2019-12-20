@@ -125,7 +125,7 @@ module cpu_test;
 
         // beq $30, $31, 0b0110
         // 12バイト先へ分岐
-        instr = beq(5'd30, 5'd31, 11'b0110);
+        instr = beq(5'd30, 5'd31, 12'b0110);
         n_reset = 1;
         #10;
         assert (
@@ -177,5 +177,35 @@ module cpu_test;
             writeData === 32'h0000 &&
             we === 1'b0
         ) $display("9 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // beq $1, $0, 0xFFF
+        // 分岐しないことのテスト。実行後の instrAddr に分岐が発生していないこと
+        instr = beq(5'd1, 5'd0, 12'hFF);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'h00FF &&
+            instrAddr === 32'h0024 &&
+            dataAddr === 32'h00FF &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("10 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // add $0, $0, $0 (nop)
+        // 上の分岐命令で分岐が発生していないこと
+        instr = add(5'b0, 5'b0, 5'b0);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'h0000 &&
+            instrAddr === 32'h0028 &&
+            dataAddr === 32'h0000 &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("11 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
     end
 endmodule
