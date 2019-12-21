@@ -85,7 +85,7 @@ module alu_controller(
             endcase
             default: case(funct)
                 10'b0000000000: aluOp = 4'b0000;
-                10'b0000000000: aluOp = 4'b0000;
+                10'b0100000000: aluOp = 4'b0001;
                 default: aluOp = 4'bXXXX;
             endcase
         endcase
