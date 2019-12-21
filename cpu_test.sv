@@ -211,7 +211,7 @@ module cpu_test;
         clk = 1; clk = 0; #10;
 
         // addi $2, $0, 0x000F
-        instr = addi(5'd2, 5'd0, 5'h0F);
+        instr = addi(5'd2, 5'd0, 12'h0F);
         n_reset = 1;
         #10;
         assert (
@@ -235,5 +235,61 @@ module cpu_test;
             writeData === 32'h000F &&
             we === 1'b0
         ) $display("13 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // $1 = 0b1100
+        instr = addi(5'd1, 5'd0, 12'b1100);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b1100 &&
+            instrAddr === 32'h0034 &&
+            dataAddr === 32'b1100 &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("14 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // $2 = 0b1010
+        instr = addi(5'd2, 5'd0, 12'b1010);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b1010 &&
+            instrAddr === 32'h0038 &&
+            dataAddr === 32'b1010 &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("15 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // and $0, $1, $2
+        instr = _and(5'd0, 5'd1, 5'd2);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b1000 &&
+            instrAddr === 32'h003C &&
+            dataAddr === 32'b1000 &&
+            writeData === 32'b1010 &&
+            we === 1'b0
+        ) $display("16 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // or $0, $1, $2
+        instr = _or(5'd0, 5'd1, 5'd2);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b1110 &&
+            instrAddr === 32'h0040 &&
+            dataAddr === 32'b1110 &&
+            writeData === 32'b1010 &&
+            we === 1'b0
+        ) $display("17 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
     end
 endmodule
