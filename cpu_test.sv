@@ -291,5 +291,48 @@ module cpu_test;
             writeData === 32'b1010 &&
             we === 1'b0
         ) $display("17 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // slt $0, $2, $1
+        instr = slt(5'd0, 5'd2, 5'd1);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b0001 &&
+            instrAddr === 32'h0044 &&
+            dataAddr === 32'b0001 &&
+            writeData === 32'b1100 &&
+            we === 1'b0
+        ) $display("18 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // slt $0, $1, $2
+        instr = slt(5'd0, 5'd1, 5'd2);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b0000 &&
+            instrAddr === 32'h0048 &&
+            dataAddr === 32'b0000 &&
+            writeData === 32'b1010 &&
+            we === 1'b0
+        ) $display("19 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // slt $0, $1, $1
+        instr = slt(5'd0, 5'd1, 5'd1);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'b0000 &&
+            instrAddr === 32'h004C &&
+            dataAddr === 32'b0000 &&
+            writeData === 32'b1100 &&
+            we === 1'b0
+        ) $display("20 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
     end
 endmodule

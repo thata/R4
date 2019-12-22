@@ -132,6 +132,40 @@ function [31:0] _xor(
     };
 endfunction
 
+// slt rd, rs1, rs2
+// rd = (rs1 < rs2) ? 1 : 0
+function [31:0] slt(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    slt = {
+        7'b0000000, // funct7
+        rs2,
+        rs1,
+        3'b010, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
+// sltu rd, rs1, rs2
+// rd = (rs1 < rs2) ? 1 : 0
+function [31:0] sltu(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    sltu = {
+        7'b0000000, // funct7
+        rs2,
+        rs1,
+        3'b011, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
 // beq rs1, rs2, imm
 function [31:0] beq(
     input logic [4:0] rs1,
