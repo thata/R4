@@ -183,3 +183,33 @@ function [31:0] beq(
         7'b1100011 // opCode
     };
 endfunction
+
+// jal rd, offset
+function [31:0] jal(
+    input logic [4:0] rd,
+    input logic [19:0] imm
+);
+    jal = {
+        imm[19],
+        imm[9:0],
+        imm[10],
+        imm[18:11],
+        rd,
+        7'b1101111 // opCode
+    };
+endfunction
+
+// jalr rd, offset(rs1)
+function [31:0] jalr(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [11:0] imm
+);
+    jalr = {
+        imm[11:0],
+        rs1,
+        3'b000,
+        rd,
+        7'b1100111 // opCode
+    };
+endfunction

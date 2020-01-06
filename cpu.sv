@@ -52,6 +52,7 @@ module cpu(
     logic dcRegWrite;
     logic aluSrc;
     logic branch;
+    logic jump;
     decoder dc(
         instr,
         dcMemWrite,
@@ -59,7 +60,8 @@ module cpu(
         aluSrc,
         aluOp,
         dcMemToReg,
-        branch
+        branch,
+        jump
     );
                            
     assign instrAddr = pc;
@@ -70,7 +72,9 @@ module cpu(
     assign rfAddr2 = instr[24:20]; // rs2
     assign rfAddr3 = instr[11:7];  // rd
     assign rfWe3 = dcRegWrite;
-    assign rfWriteData3Sel = (dcMemToReg) ? readData : result; 
+    assign rfWriteData3Sel = (dcMemToReg) ? readData :
+                             (jump)       ? returnAddr
+                                          : result; 
     assign rfWriteData3 = rfWriteData3Sel;
 
     logic [31:0] aluIn2Sel;
@@ -82,9 +86,12 @@ module cpu(
     assign dataAddr = result;
     assign writeData = rfReadData2;
 
-    logic [31:0] nextPC;
-    assign nextPC = (branch & aluZero) ? pc + imm
-                                        : pc + 4;
+    logic [31:0] pcPlus4, nextPC, returnAddr;
+    assign pcPlus4 = pc + 4;
+    assign nextPC = (branch & aluZero) ? pc + imm :
+                    jump               ? pc + imm
+                                       : pcPlus4;
+    assign returnAddr = pcPlus4;
 
     always_ff @(posedge clk) begin
         if (!n_reset)

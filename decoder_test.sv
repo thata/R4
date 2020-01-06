@@ -7,8 +7,9 @@ module decoder_test;
     logic [3:0] aluOp;
     logic memToReg;
     logic branch;
+    logic jump;
 
-    decoder dut(instr, memWrite, regWrite, aluSrc, aluOp, memToReg, branch);
+    decoder dut(instr, memWrite, regWrite, aluSrc, aluOp, memToReg, branch, jump);
 
     initial begin
         // lw

@@ -6,19 +6,33 @@ module immgen_test;
     immgen ig(instr, imm);
 
     initial begin
-        // I形式の即値
+        // I type immediate
         instr = lw(5'b0, 5'b0, 12'b1111_1111_1111);
-        #10
+        #10;
         assert (imm === 32'b11111111_11111111_11111111_11111111) $display("PASSED"); else $display("FAILED %b", imm);
 
-        // S形式の即値
+        // S type immediate
         instr = sw(5'b0, 5'b1, 12'b1111_11111110);
-        #10
+        #10;
         assert (imm === 32'b11111111_11111111_11111111_11111110) $display("PASSED"); else $display("FAILED %b", imm);
 
-        // B形式の即値
+        // B type immediate
         instr = beq(5'b0, 5'b0, 12'b1111_0000_1111);
-        #10
+        #10;
         assert (imm === 32'b1111_1111_1111_1111_1111_1110_0001_1110) $display("PASSED"); else $display("FAILED %b", imm);
+
+        // jal immediate
+        instr = jal(5'b0, 20'b0000_1111_1010_0101_1100);
+        #10;
+        assert (imm === 32'b0001_1111_0100_1011_1000) $display("PASSED"); else $display("FAILED %b", imm);
+
+        instr = jal(5'b0, 20'b1000_1111_1010_0101_1100);
+        #10;
+        assert (imm === 32'b1111_1111_1111_0001_1111_0100_1011_1000) $display("PASSED"); else $display("FAILED %b", imm);
+
+        // jalr immediate
+        instr = jalr(5'd0, 5'd0, 12'b1100_1111_0011);
+        #10;
+        assert (imm === 32'b1111_1111_1111_1111_1111_1100_1111_0011) $display("PASSED"); else $display("FAILED %b", imm);
     end
 endmodule

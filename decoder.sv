@@ -5,7 +5,8 @@ module decoder(
     output logic aluSrc,
     output logic [3:0] aluOp,
     output logic memToReg,
-    output logic branch
+    output logic branch,
+    output logic jump
 );
     logic [6:0] opCode;
     logic [2:0] funct3;
@@ -27,7 +28,9 @@ module decoder(
 
     assign regWrite = (opCode === 7'b0000011) ? 1'b1 : // lw
                       (opCode === 7'b0010011) ? 1'b1 : // addi
-                      (opCode === 7'b0110011) ? 1'b1   // R type (add)
+                      (opCode === 7'b0110011) ? 1'b1 : // R type (add)
+                      (opCode === 7'b1101111) ? 1'b1 : // jal
+                      (opCode === 7'b1100111) ? 1'b1   // jalr
                                               : 1'b0;
 
     // select alu.in2 src
@@ -42,11 +45,17 @@ module decoder(
     assign branch = (opCode === 7'b1100011) ? 1'b1 // B type
                                             : 1'b0;
 
+    assign jump = (opCode === 7'b1101111) ? 1'b1 : // jal
+                  (opCode === 7'b1100111) ? 1'b1   // jalr
+                                          : 1'b0;
+
     assign funct3 = instr[14:12];
     assign funct7 = instr[31:25];
     assign preAluOp = (opCode == 7'b1100011) ? 2'b01 : // B type => sub
                       (opCode == 7'b0000011) ? 2'b00 : // lw => add
                       (opCode == 7'b0100011) ? 2'b00 : // sw => add
+                      (opCode == 7'b1101111) ? 2'b00 : // jal => add
+                      (opCode == 7'b1100111) ? 2'b00 : // jalr => add
                       (opCode == 7'b0010011) ? 2'b11   // addi => funct3
                                              : 2'b10;  // funct
 

@@ -334,5 +334,39 @@ module cpu_test;
             we === 1'b0
         ) $display("20 PASSED"); else $display("FAILED %b %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
+        clk = 1; clk = 0; #10;
+
+        // reset registers
+        for (i = 0; i < 32; i = i + 1) begin
+            // add $rd, $rs1, $rs2
+            instr = add(i[4:0], 5'b0, 5'b0);
+            #10
+            clk = 1; clk = 0;
+        end
+
+        // jal
+        instr = jal(5'd1, 20'h100);
+        #10;
+        assert (
+            result === 32'h0200 &&
+            instrAddr === 32'h00D0 &&
+            dataAddr === 32'h0200 &&
+            writeData === 32'b0000 &&
+            we === 1'b0
+        ) $display("21 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // check pc and $1 values after jal
+        instr = add(5'b0, 5'b1, 5'b0);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'h00D4 &&
+            instrAddr === 32'h02D0 &&
+            dataAddr === 32'h00D4 &&
+            writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("22 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
     end
 endmodule
