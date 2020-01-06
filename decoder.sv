@@ -6,7 +6,8 @@ module decoder(
     output logic [3:0] aluOp,
     output logic memToReg,
     output logic branch,
-    output logic jump
+    output logic jump,
+    output logic jumpReg
 );
     logic [6:0] opCode;
     logic [2:0] funct3;
@@ -48,6 +49,9 @@ module decoder(
     assign jump = (opCode === 7'b1101111) ? 1'b1 : // jal
                   (opCode === 7'b1100111) ? 1'b1   // jalr
                                           : 1'b0;
+
+    assign jumpReg = (opCode === 7'b1100111) ? 1'b1 // jalr
+                                             : 1'b0;
 
     assign funct3 = instr[14:12];
     assign funct7 = instr[31:25];

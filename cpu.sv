@@ -53,6 +53,7 @@ module cpu(
     logic aluSrc;
     logic branch;
     logic jump;
+    logic jumpReg;
     decoder dc(
         instr,
         dcMemWrite,
@@ -61,7 +62,8 @@ module cpu(
         aluOp,
         dcMemToReg,
         branch,
-        jump
+        jump,
+        jumpReg
     );
                            
     assign instrAddr = pc;
@@ -89,6 +91,7 @@ module cpu(
     logic [31:0] pcPlus4, nextPC, returnAddr;
     assign pcPlus4 = pc + 4;
     assign nextPC = (branch & aluZero) ? pc + imm :
+                    jumpReg            ? (aluResult & 32'hFFFFFFFE) : // mask lowest bit on jalr
                     jump               ? pc + imm
                                        : pcPlus4;
     assign returnAddr = pcPlus4;
