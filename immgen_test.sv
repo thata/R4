@@ -34,5 +34,10 @@ module immgen_test;
         instr = jalr(5'd0, 5'd0, 12'b1100_1111_0011);
         #10;
         assert (imm === 32'b1111_1111_1111_1111_1111_1100_1111_0011) $display("PASSED"); else $display("FAILED %b", imm);
+
+        // U type immediate (lui)
+        instr = lui(5'd1, 20'b1111_0000_1100_0011_0101);
+        #10;
+        assert (imm === 32'b1111_0000_1100_0011_0101_0000_0000_0000) $display("PASSED"); else $display("FAILED %b", imm);
     end
 endmodule

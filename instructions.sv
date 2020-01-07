@@ -213,3 +213,31 @@ function [31:0] jalr(
         7'b1100111 // opCode
     };
 endfunction
+
+// lui rd, imm
+function [31:0] lui(
+    input logic [4:0] rd,
+    input logic [19:0] imm
+);
+    lui = {
+        imm,
+        rd,
+        7'b0110111 // opCode
+    };
+endfunction
+
+// ori rd, rs1, immediate
+// rd = rs1 | immediate
+function [31:0] ori(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [11:0] imm
+);
+    ori = {
+        imm,
+        rs1,
+        3'b110, // funct3
+        rd,
+        7'b0010011 // opCode
+    };
+endfunction

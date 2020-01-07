@@ -2,7 +2,8 @@ module decoder(
     input logic [31:0] instr,
     output logic memWrite,
     output logic regWrite,
-    output logic aluSrc,
+    output logic aluIn1Src,
+    output logic aluIn2Src,
     output logic [3:0] aluOp,
     output logic memToReg,
     output logic branch,
@@ -28,16 +29,23 @@ module decoder(
     assign memWrite = (opCode === 7'b0100011) ? 1'b1 : 1'b0;
 
     assign regWrite = (opCode === 7'b0000011) ? 1'b1 : // lw
-                      (opCode === 7'b0010011) ? 1'b1 : // addi
+                      (opCode === 7'b0010011) ? 1'b1 : // addi, ori
                       (opCode === 7'b0110011) ? 1'b1 : // R type (add)
+                      (opCode === 7'b0110111) ? 1'b1 : // lui
                       (opCode === 7'b1101111) ? 1'b1 : // jal
                       (opCode === 7'b1100111) ? 1'b1   // jalr
                                               : 1'b0;
 
+    // select alu.in1 src
+    // 0: 32'b0
+    // 1: ds1
+    assign aluIn1Src = (opCode === 7'b0110111) ? 1'b0 // lui
+                                               : 1'b1;
+
     // select alu.in2 src
     // 0: imm
     // 1: ds2 (B, R type)
-    assign aluSrc = (opCode === 7'b0110011) ? 1'b1 : // R type
+    assign aluIn2Src = (opCode === 7'b0110011) ? 1'b1 : // R type
                     (opCode === 7'b1100011) ? 1'b1   // B type
                                             : 1'b0;
 
@@ -60,11 +68,12 @@ module decoder(
                       (opCode == 7'b0100011) ? 2'b00 : // sw => add
                       (opCode == 7'b1101111) ? 2'b00 : // jal => add
                       (opCode == 7'b1100111) ? 2'b00 : // jalr => add
+                      (opCode == 7'b0110111) ? 2'b00 : // lui => add
                       (opCode == 7'b0010011) ? 2'b11   // addi => funct3
                                              : 2'b10;  // funct
 
     // always @(*) begin
-    //     $display("aluSrc %b", aluSrc);
+    //     $display("aluIn2Src %b", aluIn2Src);
     //     $display("preAluOp %b", preAluOp);
     //     $display("aluOp %b", aluOp);
     // end

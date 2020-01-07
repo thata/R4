@@ -50,7 +50,8 @@ module cpu(
     // decoder
     logic dcMemWrite;
     logic dcRegWrite;
-    logic aluSrc;
+    logic aluIn1Src;
+    logic aluIn2Src;
     logic branch;
     logic jump;
     logic jumpReg;
@@ -58,7 +59,8 @@ module cpu(
         instr,
         dcMemWrite,
         dcRegWrite,
-        aluSrc,
+        aluIn1Src,
+        aluIn2Src,
         aluOp,
         dcMemToReg,
         branch,
@@ -79,9 +81,11 @@ module cpu(
                                           : result; 
     assign rfWriteData3 = rfWriteData3Sel;
 
+    logic [31:0] aluIn1Sel;
     logic [31:0] aluIn2Sel;
-    assign aluIn1 = rfReadData1;
-    assign aluIn2Sel = (aluSrc === 0) ? imm : rfReadData2;
+    assign aluIn1Sel = (aluIn1Src == 0) ? 32'b0 : rfReadData1;
+    assign aluIn1 = aluIn1Sel;
+    assign aluIn2Sel = (aluIn2Src == 0) ? imm : rfReadData2;
     assign aluIn2 = aluIn2Sel;
     assign result = aluResult;
 
@@ -116,7 +120,7 @@ module cpu(
     //     // $display("RD2 %b", rfReadData2);
     //     // $display("A3 %b", rfAddr3);
     //     // $display("WD3 %b", rfWriteData3);
-    //     $display("aluSrc %b", aluSrc);
+    //     // $display("aluIn2Src %b", aluIn2Src);
     //     $display("aluOp %b", aluOp);
     //     $display("aluIn1 %b", aluIn1);
     //     $display("aluIn2 %b", aluIn2);

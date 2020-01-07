@@ -5,6 +5,7 @@ module immgen(
     logic [6:0] opCode;
     logic [11:0] imm12;
     logic [12:0] imm13;
+    logic [19:0] imm20;
     logic [20:0] imm21;
 
     assign opCode = instr[6:0];
@@ -18,11 +19,15 @@ module immgen(
     // J type
     assign imm21 = {instr[31], instr[19:12], instr[20], instr[30:21], 1'b0};
 
-    // sign extend
-    assign imm = (opCode == 7'b1100011) ? {{19{imm13[12]}}, imm13} :
+    // U type
+    assign imm20 = instr[31:12];
+
+    // sign extend or shift
+    assign imm = (opCode == 7'b0110111) ? {imm20, 12'b0} : // U type (lui)
+                 (opCode == 7'b1100011) ? {{19{imm13[12]}}, imm13} :
                  (opCode == 7'b1101111) ? {{11{imm21[20]}}, imm21} 
                                         : {{20{imm12[11]}}, imm12};
-                                        
+
     // always @(imm) begin
     //     $display("instr %b", instr);
     //     $display("imm12 %b", imm12);

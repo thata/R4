@@ -397,5 +397,34 @@ module cpu_test;
             writeData === 32'h0000 &&
             we === 1'b0
         ) $display("24 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // lui
+        instr = lui(5'd1, 20'hABCDE);
+        #10;
+        assert (
+            result === 32'hABCDE000 &&
+            instrAddr === 32'h01d8 &&
+            dataAddr === 32'hABCDE000 &&
+            writeData === 32'b0000 &&
+            we === 1'b0
+        ) $display("25 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
+
+        // check $1 value
+        instr = add(5'b0, 5'b1, 5'b0);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'hABCDE000 &&
+            instrAddr === 32'h01dc &&
+            dataAddr === 32'hABCDE000 &&
+            writeData === 32'b0000 &&
+            we === 1'b0
+        ) $display("26 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        // next, ori
     end
 endmodule
