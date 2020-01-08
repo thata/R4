@@ -69,7 +69,7 @@ module decoder(
                       (opCode == 7'b1101111) ? 2'b00 : // jal => add
                       (opCode == 7'b1100111) ? 2'b00 : // jalr => add
                       (opCode == 7'b0110111) ? 2'b00 : // lui => add
-                      (opCode == 7'b0010011) ? 2'b11   // addi => funct3
+                      (opCode == 7'b0010011) ? 2'b11   // addi, ori => funct3
                                              : 2'b10;  // funct
 
     // always @(*) begin
@@ -103,6 +103,7 @@ module alu_controller(
             2'b01: aluOp = 4'b0001; // sub
             2'b11: case(funct3)
                 3'b000: aluOp = 4'b0000; // addi => add
+                3'b110: aluOp = 4'b1000; // ori => or
                 default: aluOp = 4'bXXXX;
             endcase
             default: case(funct)
