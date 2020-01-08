@@ -241,3 +241,53 @@ function [31:0] ori(
         7'b0010011 // opCode
     };
 endfunction
+
+// srl rd, rs1, rs2
+function [31:0] srl(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    srl = {
+        7'b0, // funct7
+        rs2,
+        rs1,
+        3'b101, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
+// sra rd, rs1, rs2
+function [31:0] sra(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    sra = {
+        7'b0100000, // funct7
+        rs2,
+        rs1,
+        3'b101, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
+
+// srl rd, rs1, rs2
+function [31:0] sll(
+    input logic [4:0] rd,
+    input logic [4:0] rs1,
+    input logic [4:0] rs2
+);
+    sll = {
+        7'b0, // funct7
+        rs2,
+        rs1,
+        3'b001, // funct3
+        rd,
+        7'b0110011 // opCode
+    };
+endfunction
+
