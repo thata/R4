@@ -448,36 +448,49 @@ module cpu_test;
         clk = 1; clk = 0; #10;
 
         // sra
-        // $0 = 0xABCDE123 >> 8
+        // $0 = 0xABCDE123 >>> 8
         // #=> 0xFFABCDE1
         instr = sra(5'd0, 5'd1, 5'd2);
         n_reset = 1;
         #10;
         assert (
-            result === 32'hABCDE123 &&
+            result === 32'hFFABCDE1 &&
             instrAddr === 32'h01e8 &&
-            dataAddr === 32'hABCDE123 &&
-            writeData === 32'h0000 &&
+            dataAddr === 32'hFFABCDE1 &&
+            // writeData === 32'h0000 &&
             we === 1'b0
-        ) $display("27 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("28 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
 
         clk = 1; clk = 0; #10;
 
         // srl
         // $0 = 0xABCDE123 >> 8
-        // #=> 0xFFABCDE1
-        instr = sra(5'd0, 5'd1, 5'd2);
+        // #=> 0x00ABCDE1
+        instr = srl(5'd0, 5'd1, 5'd2);
         n_reset = 1;
         #10;
         assert (
-            result === 32'hABCDE123 &&
-            instrAddr === 32'h01e8 &&
-            dataAddr === 32'hABCDE123 &&
-            writeData === 32'h0000 &&
+            result === 32'h00ABCDE1 &&
+            instrAddr === 32'h01ec &&
+            dataAddr === 32'h00ABCDE1 &&
+            // writeData === 32'h0000 &&
             we === 1'b0
-        ) $display("27 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+        ) $display("29 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
+
+        clk = 1; clk = 0; #10;
 
         // sll
-
+        // $0 = 0xABCDE123 << 8
+        // #=> 0xCDE12300
+        instr = sll(5'd0, 5'd1, 5'd2);
+        n_reset = 1;
+        #10;
+        assert (
+            result === 32'hCDE12300 &&
+            instrAddr === 32'h01f0 &&
+            dataAddr === 32'hCDE12300 &&
+            // writeData === 32'h0000 &&
+            we === 1'b0
+        ) $display("30 PASSED"); else $display("FAILED %h %h %h %h %b", result, instrAddr, dataAddr, writeData, we);
     end
 endmodule
