@@ -78,7 +78,7 @@ module test_rom(
             32'h0014: dout = jal(5'd0, -6);
             // BREAK: sw $1, 0($0)
             32'h0018: dout = sw(5'd0, 5'd1, 12'b0);
-            // jal $0, FIN
+            // FIN: jal $0, FIN
             32'h0020: dout = jal(5'd0, 0);
             default:  dout = addi(5'b0, 5'b0, 5'b0);
         endcase
