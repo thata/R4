@@ -1,3 +1,5 @@
+// TOP testbench
+// iverilog -g 2012 -s top_test *.sv && ./a.out 
 module top_test();
     logic clk = 0;
     logic n_reset = 1;

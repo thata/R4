@@ -1,3 +1,4 @@
+// CPU testbench
 // iverilog -g 2012 -s cpu_test *.sv && ./a.out
 module cpu_test;
     logic clk, n_reset;
