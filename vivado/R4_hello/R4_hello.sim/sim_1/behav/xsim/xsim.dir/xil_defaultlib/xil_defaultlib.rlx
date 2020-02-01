@@ -2,11 +2,12 @@
 2019.2
 Nov  6 2019
 21:57:16
-C:/Users/takas/src/R4/alu.sv,1579492961,systemVerilog,C:/Users/takas/src/R4/cpu.sv;C:/Users/takas/src/R4/decoder.sv;C:/Users/takas/src/R4/immgen.sv;C:/Users/takas/src/R4/regfile.sv;C:/Users/takas/src/R4/top_test.sv,C:/Users/takas/src/R4/cpu.sv,,$unit_alu_sv;alu,,,,,,,,
+C:/Users/takas/src/R4/alu.sv,1579492961,systemVerilog,C:/Users/takas/src/R4/cpu.sv;C:/Users/takas/src/R4/decoder.sv;C:/Users/takas/src/R4/immgen.sv;C:/Users/takas/src/R4/regfile.sv;C:/Users/takas/src/R4/top_test.sv,C:/Users/takas/src/R4/alu_test.sv,,alu,,,,,,,,
+C:/Users/takas/src/R4/alu_test.sv,1580524486,systemVerilog,,,,alu_test,,,,,,,,
 C:/Users/takas/src/R4/cpu.sv,1579492961,systemVerilog,,C:/Users/takas/src/R4/decoder.sv,,cpu,,,,,,,,
 C:/Users/takas/src/R4/decoder.sv,1579492961,systemVerilog,,C:/Users/takas/src/R4/immgen.sv,,alu_controller;decoder,,,,,,,,
 C:/Users/takas/src/R4/immgen.sv,1579492961,systemVerilog,,C:/Users/takas/src/R4/regfile.sv,,immgen,,,,,,,,
 C:/Users/takas/src/R4/instructions.sv,1579492961,verilog,,,,,,,,,,,,
 C:/Users/takas/src/R4/regfile.sv,1579492961,systemVerilog,,C:/Users/takas/src/R4/top_test.sv,,regfile,,,,,,,,
-C:/Users/takas/src/R4/top_test.sv,1580516676,systemVerilog,,,C:/Users/takas/src/R4/instructions.sv,data_ram;test_rom;top_test,,,,,,,,
-C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.sim/sim_1/behav/xsim/glbl.v,1573089660,verilog,,,,glbl,,,,,,,,
+C:/Users/takas/src/R4/top_test.sv,1580518144,systemVerilog,,,C:/Users/takas/src/R4/instructions.sv,ram;test_rom;top_test,,,,,,,,
+C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.sim/sim_1/behav/xsim/glbl.v,1580517244,verilog,,,,glbl,,,,,,,,
