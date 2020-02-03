@@ -1,0 +1,468 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Mon Feb  3 19:15:48 2020
+# Process ID: 11756
+# Current directory: C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1
+# Command line: vivado.exe -log R4_hello_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source R4_hello_top.tcl
+# Log file: C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1/R4_hello_top.vds
+# Journal file: C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source R4_hello_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 327.871 ; gain = 34.188
+Command: synth_design -top R4_hello_top -part xc7a35tcpg236-1 -directive AreaOptimized_high -control_set_opt_threshold 1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 16144 
+WARNING: [Synth 8-6901] identifier 'returnAddr' is used before its declaration [C:/Users/takas/src/R4/cpu.sv:80]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 870.613 ; gain = 239.027
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'R4_hello_top' [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'clk_10mhz' [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1/.Xil/Vivado-11756-muon/realtime/clk_10mhz_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_10mhz' (1#1) [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1/.Xil/Vivado-11756-muon/realtime/clk_10mhz_stub.v:5]
+WARNING: [Synth 8-7023] instance 'instance_name' of module 'clk_10mhz' has 4 connections declared, but only 2 given [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:27]
+INFO: [Synth 8-6157] synthesizing module 'cpu' [C:/Users/takas/src/R4/cpu.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/takas/src/R4/alu.sv:17]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (2#1) [C:/Users/takas/src/R4/alu.sv:17]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [C:/Users/takas/src/R4/regfile.sv:1]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/regfile.sv:11]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/regfile.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (3#1) [C:/Users/takas/src/R4/regfile.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'immgen' [C:/Users/takas/src/R4/immgen.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'immgen' (4#1) [C:/Users/takas/src/R4/immgen.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'decoder' [C:/Users/takas/src/R4/decoder.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'alu_controller' [C:/Users/takas/src/R4/decoder.sv:90]
+INFO: [Synth 8-6155] done synthesizing module 'alu_controller' (5#1) [C:/Users/takas/src/R4/decoder.sv:90]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:29]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:31]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:32]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:33]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:34]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:35]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:36]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:42]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:48]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:49]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:54]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:57]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:58]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/takas/src/R4/decoder.sv:61]
+INFO: [Synth 8-6155] done synthesizing module 'decoder' (6#1) [C:/Users/takas/src/R4/decoder.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'cpu' (7#1) [C:/Users/takas/src/R4/cpu.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'r4_hello_test_rom' [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:62]
+INFO: [Synth 8-6155] done synthesizing module 'r4_hello_test_rom' (8#1) [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:62]
+INFO: [Synth 8-6157] synthesizing module 'r4_hello_ram' [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:111]
+INFO: [Synth 8-6155] done synthesizing module 'r4_hello_ram' (9#1) [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:111]
+WARNING: [Synth 8-3936] Found unconnected internal register 'led_buffer_reg' and it is trimmed from '32' to '16' bits. [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:21]
+INFO: [Synth 8-6155] done synthesizing module 'R4_hello_top' (10#1) [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/new/R4_hello_top.sv:3]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[24]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[23]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[22]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[21]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[20]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[19]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[18]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[17]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[16]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[15]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[11]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[10]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[9]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[8]
+WARNING: [Synth 8-3331] design decoder has unconnected port instr[7]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[15]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[14]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[13]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[12]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[11]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[10]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[9]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[8]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[7]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[6]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[5]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[4]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[3]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[2]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[1]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[0]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 939.160 ; gain = 307.574
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 939.160 ; gain = 307.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 939.160 ; gain = 307.574
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.256 . Memory (MB): peak = 939.160 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/ip/clk_10mhz/clk_10mhz/clk_10mhz_in_context.xdc] for cell 'instance_name'
+Finished Parsing XDC File [c:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/ip/clk_10mhz/clk_10mhz/clk_10mhz_in_context.xdc] for cell 'instance_name'
+Parsing XDC File [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/constrs_1/imports/digilent-xdc-master/Basys-3-Master.xdc]
+Finished Parsing XDC File [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/constrs_1/imports/digilent-xdc-master/Basys-3-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/constrs_1/imports/digilent-xdc-master/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/R4_hello_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/R4_hello_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1080.289 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.125 . Memory (MB): peak = 1080.289 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 1080.289 ; gain = 448.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 1080.289 ; gain = 448.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property IO_BUFFER_TYPE = NONE for clk. (constraint file  c:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/ip/clk_10mhz/clk_10mhz/clk_10mhz_in_context.xdc, line 3).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for clk. (constraint file  c:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/ip/clk_10mhz/clk_10mhz/clk_10mhz_in_context.xdc, line 4).
+Applied set_property DONT_TOUCH = true for instance_name. (constraint file  auto generated constraint, line ).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 1080.289 ; gain = 448.703
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5545] ROM "dout" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:39 ; elapsed = 00:00:47 . Memory (MB): peak = 1080.289 ; gain = 448.703
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 3     
+	   3 Input     32 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 257   
+	               16 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 9     
+	   4 Input     32 Bit        Muxes := 1     
+	  15 Input     32 Bit        Muxes := 1     
+	   2 Input     12 Bit        Muxes := 1     
+	  15 Input      4 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 2     
+	   8 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 16    
+	   5 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module R4_hello_top 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
+Module alu 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   3 Input     32 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
+Module regfile 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+Module immgen 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input     12 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+Module alu_controller 
+Detailed RTL Component Info : 
++---Muxes : 
+	  15 Input      4 Bit        Muxes := 1     
+Module decoder 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input      2 Bit        Muxes := 1     
+	   8 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 8     
+	   5 Input      1 Bit        Muxes := 1     
+Module cpu 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 2     
++---Registers : 
+	               32 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 6     
+Module r4_hello_test_rom 
+Detailed RTL Component Info : 
++---Muxes : 
+	  15 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 1     
+Module r4_hello_ram 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 256   
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 8     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5546] ROM "p_0_out" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "dout" won't be mapped to RAM because it is too sparse
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[15]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[14]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[13]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[12]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[11]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[10]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[9]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[8]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[7]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[6]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[5]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[4]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[3]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[2]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[1]
+WARNING: [Synth 8-3331] design R4_hello_top has unconnected port sw[0]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:37 ; elapsed = 00:03:55 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping	Report (see note below)
++-------------+-----------------------+-----------+----------------------+--------------+
+|Module Name  | RTL Object            | Inference | Size (Depth x Width) | Primitives   | 
++-------------+-----------------------+-----------+----------------------+--------------+
+|R4_hello_top | _cpu/rf/registers_reg | Implied   | 32 x 32              | RAM32M x 12	 | 
++-------------+-----------------------+-----------+----------------------+--------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:54 ; elapsed = 00:04:12 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:04:00 ; elapsed = 00:04:18 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping	Report
++-------------+-----------------------+-----------+----------------------+--------------+
+|Module Name  | RTL Object            | Inference | Size (Depth x Width) | Primitives   | 
++-------------+-----------------------+-----------+----------------------+--------------+
+|R4_hello_top | _cpu/rf/registers_reg | Implied   | 32 x 32              | RAM32M x 12	 | 
++-------------+-----------------------+-----------+----------------------+--------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:04:01 ; elapsed = 00:04:19 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-4442] BlackBox module instance_name has unconnected pin reset
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |clk_10mhz     |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |clk_10mhz |     1|
+|2     |CARRY4    |    44|
+|3     |LUT1      |     1|
+|4     |LUT2      |    66|
+|5     |LUT3      |   116|
+|6     |LUT4      |   109|
+|7     |LUT5      |    14|
+|8     |LUT6      |    94|
+|9     |RAM32M    |    12|
+|10    |FDRE      |    64|
+|11    |OBUF      |    16|
++------+----------+------+
+
+Report Instance Areas: 
++------+---------+-------------+------+
+|      |Instance |Module       |Cells |
++------+---------+-------------+------+
+|1     |top      |             |   538|
+|2     |  _cpu   |cpu          |   488|
+|3     |    alu  |alu          |   158|
+|4     |    rf   |regfile      |   249|
+|5     |  _ram   |r4_hello_ram |    16|
++------+---------+-------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:04:13 ; elapsed = 00:04:31 . Memory (MB): peak = 1162.875 ; gain = 531.289
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 1 critical warnings and 16 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:51 ; elapsed = 00:04:23 . Memory (MB): peak = 1162.875 ; gain = 390.160
+Synthesis Optimization Complete : Time (s): cpu = 00:04:13 ; elapsed = 00:04:32 . Memory (MB): peak = 1162.875 ; gain = 531.289
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1162.875 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 56 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1162.875 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 12 instances were transformed.
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 12 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+35 Infos, 66 Warnings, 1 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:04:25 ; elapsed = 00:04:46 . Memory (MB): peak = 1162.875 ; gain = 802.875
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1162.875 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1/R4_hello_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file R4_hello_top_utilization_synth.rpt -pb R4_hello_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Feb  3 19:20:56 2020...

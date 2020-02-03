@@ -1,11 +1,12 @@
-// TOP testbench
-// iverilog -g 2012 -s top_test *.sv && ./a.out 
+`include "../../../../../instructions.sv"
 
-`include "instructions.sv"
-
-module top_test();
-    logic clk = 0;
+module R4_hello_top(
+    input logic clk,
+    input logic [15:0] sw,
+    output logic [15:0] led
+);    
     logic n_reset = 1;
+    logic cpu_clk;
     logic [31:0] instr;
     logic [31:0] readData;
     logic [31:0] result;
@@ -14,9 +15,24 @@ module top_test();
     logic [31:0] writeData;
     logic we;
     logic [31:0] peek;
+    logic [31:0] led_buffer = 32'b0;
 
+    // peek
+    assign led = led_buffer;
+    always_ff @(posedge cpu_clk) begin
+        led_buffer <= peek;
+    end
+
+    // clock
+    clk_10mhz instance_name(
+        .clk_out1(cpu_clk),
+        // .reset(0),
+        //.locked(locked),
+        .clk_in1(clk)
+    );
+    
     cpu _cpu(
-        clk,
+        cpu_clk,
         n_reset,
         instr,
         readData,
@@ -27,66 +43,28 @@ module top_test();
         we
     );
 
-    test_rom _rom(
+    r4_hello_test_rom _rom(
         instrAddr,
         instr
     );
 
-    ram _ram(
-        clk,
+    r4_hello_ram _ram(
+        cpu_clk,
         dataAddr,
         writeData,
         we,
         readData,
         peek
-    );
-
-    initial begin
-        n_reset = 0;
-        #10;
-        n_reset = 1;
-    end
-
-    always #5 begin
-        // $display("pc %x", instrAddr);
-        // $display("result %x", result);
-
-        clk <= !clk;
-        
-        if ($time > 1000000) begin
-            // fib(10) == 55
-            assert (
-                peek == 32'd55
-            ) $display("PASSED"); else $display("FAILED %h", peek);
-
-            $finish;
-        end
-    end
+    );    
 endmodule
 
-// fibonacci(10) „ÇíM[0]„Å∏Êõ∏„ÅçËæº„ÇÄ
-module test_rom(
+// fib(10) == 55
+module r4_hello_test_rom(
     input logic [31:0] addr,
     output logic [31:0] dout
 );
-    /*
-        # fibonacci
-        def fib(n)
-            a = 0
-            b = 1
-            c = 0
-            i = 0
-            while i < n
-                a = b
-                b = c
-                c = a + b
-                i = i + 1
-            end
-            c 
-        end
-        puts fib(10)
-    */
-    always_comb begin
+
+ always_comb begin
         case(addr)
             // a = 0
             // addi $1, $0, 0
@@ -105,7 +83,7 @@ module test_rom(
             32'h0010: dout = addi(5'd5, 5'd0, 10);
             // LOOP: slt $6, $4, $5
             32'h0014: dout = slt(5'd6, 5'd4, 5'd5);
-            // beq $6, $0, BREAK (6ÂëΩ‰ª§ -> 24„Éê„Ç§„Éà -> 12)
+            // beq $6, $0, BREAK (6ñΩóﬂ -> 24ÉoÉCÉg -> 12)
             32'h0018: dout = beq(5'd6, 5'd0, 12);
             // a = b
             // $add $1, $0, $2
@@ -119,7 +97,7 @@ module test_rom(
             // i = i + 1
             // $addi $4, $4, 1
             32'h0028: dout = addi(5'd4, 5'd4, 1);
-            // jal $0, LOOP (-6ÂëΩ‰ª§ -> -24„Éê„Ç§„Éà -> -12)
+            // jal $0, LOOP (-6ñΩóﬂ -> -24ÉoÉCÉg -> -12)
             32'h002C: dout = jal(5'd0, -12);
             // BREAK: sw $3, 0($0)
             32'h0030: dout = sw(5'd0, 5'd3, 12'b0);
@@ -130,7 +108,7 @@ module test_rom(
     end
 endmodule
 
-module ram(
+module r4_hello_ram(
     input clk,
     input logic [31:0] addr, din,
     input logic we,
@@ -138,7 +116,8 @@ module ram(
     output logic [31:0] peek
 );
 
-    logic [32:0] mem [255:0];
+//    logic [32:0] mem [4095:0]; // 12bit
+    logic [32:0] mem [255:0]; // 8bit
 
     assign dout = mem[addr];
     assign peek = mem[0];
