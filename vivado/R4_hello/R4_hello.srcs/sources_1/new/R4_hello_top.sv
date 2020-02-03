@@ -30,7 +30,7 @@ module R4_hello_top(
         //.locked(locked),
         .clk_in1(clk)
     );
-
+    
     cpu _cpu(
         cpu_clk,
         n_reset,
@@ -58,28 +58,51 @@ module R4_hello_top(
     );    
 endmodule
 
+// fib(10) == 55
 module r4_hello_test_rom(
     input logic [31:0] addr,
     output logic [31:0] dout
 );
-    always_comb begin
+
+ always_comb begin
         case(addr)
+            // a = 0
             // addi $1, $0, 0
             32'h0000: dout = addi(5'd1, 5'd0, 0);
-            // addi $2, $0, 255
-            32'h0004: dout = addi(5'd2, 5'd0, 254);
-            // LOOP: beq $2, $0, BREAK
-            32'h0008: dout = beq(5'd2, 5'd0, 8);
-            // addi $1, $1, 1
-            32'h000C: dout = addi(5'd1, 5'd1, 1);
-            // addi $2, $2, -1
-            32'h0010: dout = addi(5'd2, 5'd2, -1);
-            // jal $0, LOOP
-            32'h0014: dout = jal(5'd0, -6);
-            // BREAK: sw $1, 0($0)
-            32'h0018: dout = sw(5'd0, 5'd1, 12'b0);
+            // b = 1
+            // addi $2, $0, 0
+            32'h0004: dout = addi(5'd2, 5'd0, 1);
+            // c = 0
+            // addi $3, $0, 0
+            32'h0008: dout = addi(5'd3, 5'd0, 0);
+            // i = 0
+            // addi $4, $0, 0
+            32'h000C: dout = addi(5'd4, 5'd0, 0);
+            // n = 10
+            // addi $5, $0, 10
+            32'h0010: dout = addi(5'd5, 5'd0, 10);
+            // LOOP: slt $6, $4, $5
+            32'h0014: dout = slt(5'd6, 5'd4, 5'd5);
+            // beq $6, $0, BREAK (6命令 -> 24バイト -> 12)
+            32'h0018: dout = beq(5'd6, 5'd0, 12);
+            // a = b
+            // $add $1, $0, $2
+            32'h001C: dout = add(5'd1, 5'd0, 5'd2);
+            // b = c
+            // $add $2, $0, $3
+            32'h0020: dout = add(5'd2, 5'd0, 5'd3);
+            // c = a + b
+            // $add $3, $1, $2
+            32'h0024: dout = add(5'd3, 5'd1, 5'd2);
+            // i = i + 1
+            // $addi $4, $4, 1
+            32'h0028: dout = addi(5'd4, 5'd4, 1);
+            // jal $0, LOOP (-6命令 -> -24バイト -> -12)
+            32'h002C: dout = jal(5'd0, -12);
+            // BREAK: sw $3, 0($0)
+            32'h0030: dout = sw(5'd0, 5'd3, 12'b0);
             // FIN: jal $0, FIN
-            32'h0020: dout = jal(5'd0, 0);
+            32'h0034: dout = jal(5'd0, 0);
             default:  dout = addi(5'b0, 5'b0, 5'b0);
         endcase
     end
