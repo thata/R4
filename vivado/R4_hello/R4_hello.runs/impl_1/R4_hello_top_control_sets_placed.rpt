@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Sat Feb  1 22:39:06 2020
+| Date         : Mon Feb  3 09:02:56 2020
 | Host         : muon running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file R4_hello_top_control_sets_placed.rpt
 | Design       : R4_hello_top
@@ -58,7 +58,7 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              32 |            8 |
+| No           | No                    | No                     |              48 |           17 |
 | No           | No                    | Yes                    |               0 |            0 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
@@ -70,12 +70,12 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------+---------------------------+--------------------+------------------+----------------+
-|  Clock Signal  |       Enable Signal       |  Set/Reset Signal  | Slice Load Count | Bel Load Count |
-+----------------+---------------------------+--------------------+------------------+----------------+
-|  clk_IBUF_BUFG | _cpu/alu/mem[0][15]_i_5_0 | _cpu/alu/pc_reg[3] |                3 |             16 |
-|  clk_IBUF_BUFG |                           |                    |                8 |             32 |
-|  clk_IBUF_BUFG | _cpu/rf/rfWe3             |                    |                9 |             72 |
-+----------------+---------------------------+--------------------+------------------+----------------+
++------------------------------+---------------------------+--------------------+------------------+----------------+
+|         Clock Signal         |       Enable Signal       |  Set/Reset Signal  | Slice Load Count | Bel Load Count |
++------------------------------+---------------------------+--------------------+------------------+----------------+
+|  instance_name/inst/clk_out1 | _cpu/alu/mem[0][15]_i_8_0 | _cpu/alu/pc_reg[5] |                3 |             16 |
+|  instance_name/inst/clk_out1 |                           |                    |               17 |             48 |
+|  instance_name/inst/clk_out1 | _cpu/rf/rfWe3             |                    |                9 |             72 |
++------------------------------+---------------------------+--------------------+------------------+----------------+
 
 

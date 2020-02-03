@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1580563013">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1580687804">
   <File Type="BITSTR-BMM" Name="R4_hello_top_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="R4_hello_top_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="R4_hello_top_timing_summary_init.rpt"/>
@@ -164,4 +164,5 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="clk_10mhz"/>
 </GenRun>

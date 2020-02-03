@@ -75,7 +75,9 @@ set rc [catch {
   set_property parent.project_path C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.xpr [current_project]
   set_property ip_output_repo C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
   add_files -quiet C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/synth_1/R4_hello_top.dcp
+  read_ip -quiet c:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/sources_1/ip/clk_10mhz/clk_10mhz.xci
   read_xdc C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.srcs/constrs_1/imports/digilent-xdc-master/Basys-3-Master.xdc
   link_design -top R4_hello_top -part xc7a35tcpg236-1
   close_msg_db -file init_design.pb
@@ -149,6 +151,25 @@ if {$rc} {
   return -code error $RESULT
 } else {
   end_step route_design
+  unset ACTIVE_STEP 
+}
+
+start_step write_bitstream
+set ACTIVE_STEP write_bitstream
+set rc [catch {
+  create_msg_db write_bitstream.pb
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
+  catch { write_mem_info -force R4_hello_top.mmi }
+  write_bitstream -force R4_hello_top.bit 
+  catch {write_debug_probes -quiet -force R4_hello_top}
+  catch {file copy -force R4_hello_top.ltx debug_nets.ltx}
+  close_msg_db -file write_bitstream.pb
+} RESULT]
+if {$rc} {
+  step_failed write_bitstream
+  return -code error $RESULT
+} else {
+  end_step write_bitstream
   unset ACTIVE_STEP 
 }
 

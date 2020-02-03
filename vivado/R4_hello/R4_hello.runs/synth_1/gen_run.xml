@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1580563013">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1580687803">
   <File Type="PA-TCL" Name="R4_hello_top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="R4_hello_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="R4_hello_top_reports.tcl"/>
@@ -87,4 +87,5 @@
       <Option Id="Directive">1</Option>
     </Step>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="clk_10mhz"/>
 </GenRun>

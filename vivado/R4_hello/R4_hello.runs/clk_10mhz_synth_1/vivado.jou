@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Sun Feb  2 00:19:08 2020
+# Process ID: 11604
+# Current directory: C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/clk_10mhz_synth_1
+# Command line: vivado.exe -log clk_10mhz.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source clk_10mhz.tcl
+# Log file: C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/clk_10mhz_synth_1/clk_10mhz.vds
+# Journal file: C:/Users/takas/src/R4/vivado/R4_hello/R4_hello.runs/clk_10mhz_synth_1\vivado.jou
+#-----------------------------------------------------------
+source clk_10mhz.tcl -notrace

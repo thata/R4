@@ -6,6 +6,7 @@ module R4_hello_top(
     output logic [15:0] led
 );    
     logic n_reset = 1;
+    logic cpu_clk;
     logic [31:0] instr;
     logic [31:0] readData;
     logic [31:0] result;
@@ -14,12 +15,24 @@ module R4_hello_top(
     logic [31:0] writeData;
     logic we;
     logic [31:0] peek;
+    logic [31:0] led_buffer = 32'b0;
 
     // peek
-    assign led = peek[15:0];
+    assign led = led_buffer;
+    always_ff @(posedge cpu_clk) begin
+        led_buffer <= peek;
+    end
+
+    // clock
+    clk_10mhz instance_name(
+        .clk_out1(cpu_clk),
+        // .reset(0),
+        //.locked(locked),
+        .clk_in1(clk)
+    );
 
     cpu _cpu(
-        clk,
+        cpu_clk,
         n_reset,
         instr,
         readData,
@@ -36,7 +49,7 @@ module R4_hello_top(
     );
 
     r4_hello_ram _ram(
-        clk,
+        cpu_clk,
         dataAddr,
         writeData,
         we,
@@ -54,7 +67,7 @@ module r4_hello_test_rom(
             // addi $1, $0, 0
             32'h0000: dout = addi(5'd1, 5'd0, 0);
             // addi $2, $0, 255
-            32'h0004: dout = addi(5'd2, 5'd0, 255);
+            32'h0004: dout = addi(5'd2, 5'd0, 254);
             // LOOP: beq $2, $0, BREAK
             32'h0008: dout = beq(5'd2, 5'd0, 8);
             // addi $1, $1, 1
@@ -80,8 +93,8 @@ module r4_hello_ram(
     output logic [31:0] peek
 );
 
-    logic [32:0] mem [4095:0]; // 12bit
-//    logic [32:0] mem [255:0]; // 8bit
+//    logic [32:0] mem [4095:0]; // 12bit
+    logic [32:0] mem [255:0]; // 8bit
 
     assign dout = mem[addr];
     assign peek = mem[0];
