@@ -1,5 +1,5 @@
 // TOP testbench
-// iverilog -g 2012 -s top_test *.sv && ./a.out 
+// iverilog -g 2012 -s top_test top_test.sv cpu.sv immgen.sv regfile.sv decoder.sv alu.sv && ./a.out
 
 `include "instructions.sv"
 
@@ -52,7 +52,7 @@ module top_test();
         // $display("result %x", result);
 
         clk <= !clk;
-        
+
         if ($time > 1000000) begin
             // fib(10) == 55
             assert (
@@ -82,11 +82,11 @@ module test_rom(
                 c = a + b
                 i = i + 1
             end
-            c 
+            c
         end
         puts fib(10)
     */
-    always_comb begin
+    always @(*) begin
         case(addr)
             // a = 0
             // addi $1, $0, 0
