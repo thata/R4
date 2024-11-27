@@ -64,7 +64,7 @@ module top_test();
     end
 endmodule
 
-// fibonacci(10) をM[0]へ書き込む
+// fibonacci(10) をメモリの0番地へ書き込む
 module test_rom(
     input logic [31:0] addr,
     output logic [31:0] dout
